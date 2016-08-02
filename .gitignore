@@ -1,0 +1,7 @@
+# python patterns
+__pycache__/
+*.py[cod]
+*$py.class
+
+# emacs patterns
+*~
