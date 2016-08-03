@@ -23,7 +23,7 @@ if __name__ == '__main__':
         '-f', '--file', help='file to interpet', dest='file_path')
     args = parser.parse_args()
     if args.file_path:
-        raw_src = read_source_from_file(args.file_path)
+        raw_src = " ".join(read_source_from_file(args.file_path))
         res = inp.interpret(raw_src)
         print(res)
     else:
