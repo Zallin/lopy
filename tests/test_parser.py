@@ -1,6 +1,6 @@
 import pytest
 
-from src.interpreter import Parser
+from src.parser import Parser
 
 from src.expressions.atom import *
 from src.expressions.special import *
