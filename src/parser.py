@@ -36,18 +36,16 @@ class Parser:
         if not isinstance(expr, list):
             return self._create_atom(expr)
         op = expr[0]
-        if isinstance(op, list):
-            op = self._parse(op)
         raw_operands = expr[1:]
         parsed_operands = []
         for o in raw_operands:
             parsed_operands.append(self._parse(o))
-        if op in self.special:
+        if not isinstance(op, list) and op in self.special:
             cons = self.special[op]
             return cons(*parsed_operands)
         else:
             cons = self.application['Application']
-            return cons(op, *parsed_operands)
+            return cons(self._parse(op), *parsed_operands)
 
     def _create_atom(self, atom):
         expr_type = None
