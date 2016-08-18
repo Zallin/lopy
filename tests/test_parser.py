@@ -40,7 +40,7 @@ def test_quote_expr_parsing_1(pr):
 
 def test_assignment_parsing(pr):
     assign_obj = pr.parse('(set! a 1)')[0]
-    assert isinstance(assign_obj, Assignment)
+    assert isinstance(assign_obj, Definition)
 
 
 def test_definition_parsing_0(pr):
@@ -50,6 +50,11 @@ def test_definition_parsing_0(pr):
 
 def test_definition_parsing_1(pr):
     def_obj = pr.parse('(define (f a b) (+ a b))')[0]
+    assert isinstance(def_obj, Definition)
+
+
+def test_definition_parsing_2(pr):
+    def_obj = pr.parse('(define (f a) (+ a 1) 3)')[0]
     assert isinstance(def_obj, Definition)
 
 
