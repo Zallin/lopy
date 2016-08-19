@@ -1,7 +1,7 @@
-import src.expressions.expression_abc as e_abc
+from src.lopy_abc import Expression
 
 
-class Number(e_abc.Expression):
+class Number(Expression):
 
     def __init__(self, n):
         self.number = float(n)
@@ -14,14 +14,17 @@ class Number(e_abc.Expression):
         return ['Number']
 
 
-class Variable(e_abc.Expression):
+class Variable(Expression):
 
     def __init__(self, v):
         self.var_name = v
 
     def eval(self, env):
-        pass
+        return env.find(self.var_name)
 
     @staticmethod
     def supported_exprs():
         return ['Variable']
+
+    def name(self):
+        return self.var_name
