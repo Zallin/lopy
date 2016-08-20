@@ -1,4 +1,5 @@
 import dynamic_import as di
+import settings
 
 from parser import Parser
 from environment import Environment
@@ -8,7 +9,7 @@ class Interpreter:
 
     def __init__(self):
         self.global_env = Environment()
-        for Proc_class in di.import_module_classes('builtin'):
+        for Proc_class in di.import_module_classes(settings.BUILTIN_PROC_MOD_NAME):
             proc_obj = Proc_class()
             self.global_env.set_binding(repr(proc_obj), proc_obj)
         self.parser = Parser()

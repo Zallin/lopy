@@ -1,6 +1,7 @@
 import re
 import inspect
 import importlib
+import settings
 
 from pathlib import Path
 
@@ -8,14 +9,12 @@ from pathlib import Path
 class Parser:
 
     def __init__(self):
-        # TO CHANGE
-        # create options file or determine load path dynamically
-        package_path = 'expressions.'
-        self.atom = self._load_module_classes_as_map(package_path + 'atom')
+        self.atom = self._load_module_classes_as_map(
+            settings.ATOM_EXPR_MOD_NAME)
         self.special = self._load_module_classes_as_map(
-            package_path + 'special')
+            settings.SPEC_EXPR_MOD_NAME)
         self.application = self._load_module_classes_as_map(
-            package_path + 'application')
+            settings.APPL_EXPR_MOD_NAME)
 
     def parse(self, raw_src):
         tokens = self._tokenize(raw_src)
