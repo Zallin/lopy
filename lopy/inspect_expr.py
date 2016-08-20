@@ -7,4 +7,4 @@ def is_builtin(expr):
 
 
 def is_application(expr):
-    return getattr(expr, 'operands_names', None) and True
+    return 'Application' in expr.supported_exprs()
