@@ -1,7 +1,8 @@
+import context
 import pytest
 
-from src.interpreter import Interpreter
-from src.expressions.special import *
+from interpreter import Interpreter
+from expressions.special import *
 
 
 @pytest.fixture

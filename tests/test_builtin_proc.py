@@ -1,6 +1,12 @@
+import context
 import pytest
 
-from src.interpreter import Interpreter
+from interpreter import Interpreter
+
+
+@pytest.fixture
+def ipr():
+    return Interpreter()
 
 
 def test_builtin_addition_with_two_args(ipr):
