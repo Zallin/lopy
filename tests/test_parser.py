@@ -1,10 +1,11 @@
+import context
 import pytest
 
-from src.parser import Parser
+from parser import Parser
 
-from src.expressions.atom import *
-from src.expressions.special import *
-from src.expressions.application import *
+from expressions.atom import *
+from expressions.special import *
+from expressions.application import *
 
 
 @pytest.fixture
