@@ -1,3 +1,4 @@
+import context
 import operator as op
 import functools as ft
 
@@ -58,3 +59,25 @@ class GreaterOp:
     @staticmethod
     def apply(a, b):
         return a > b
+
+
+class DivisionOp:
+
+    @staticmethod
+    def __repr__():
+        return '/'
+
+    @staticmethod
+    def apply(a, b):
+        return a / b
+
+
+class RemainderOp:
+
+    @staticmethod
+    def __repr__():
+        return 'remainder'
+
+    @staticmethod
+    def apply(a, b):
+        return a % b

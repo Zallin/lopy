@@ -1,4 +1,4 @@
-from src.lopy_abc import Expression
+from lopy_abc import Expression
 
 
 class Number(Expression):

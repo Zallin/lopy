@@ -8,7 +8,9 @@ from pathlib import Path
 class Parser:
 
     def __init__(self):
-        package_path = 'src.expressions.'
+        # TO CHANGE
+        # create options file or determine load path dynamically
+        package_path = 'expressions.'
         self.atom = self._load_module_classes_as_map(package_path + 'atom')
         self.special = self._load_module_classes_as_map(
             package_path + 'special')
