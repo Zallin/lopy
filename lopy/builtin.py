@@ -1,4 +1,3 @@
-import context
 import operator as op
 import functools as ft
 
