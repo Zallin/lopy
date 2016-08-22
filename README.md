@@ -1,3 +1,4 @@
+# lopy (Lisp on Python)
 ## Description
 Lopy is an MIT Scheme interpreter which creation was inspired by SICP book. 
 ## How to use it?
@@ -16,4 +17,4 @@ python3 lopy/lo.py --file example.rkt
     * ```(define [(f a)] (+ 1 2)) ``` 
     * ```(lambda [(a b)] (* a b))```
     * ```(cond [((= 1 1) 1)] [(else 2)])```
-2. Addition of new syntactic forms/builtin procedures from arbitrary file (without editing files in lopy/expressions/ dir
+2. Addition of new syntactic forms/builtin procedures from arbitrary file (without editing files in lopy/expressions/ dir)
