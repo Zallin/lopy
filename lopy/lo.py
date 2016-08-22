@@ -6,7 +6,7 @@ from interpreter import Interpreter
 def read_source_from_file(file_path):
     with open(file_path) as f:
         file_content = f.read()
-    return filter(lambda sl: sl or False, file_content.replace('\n', ''))
+    return " ".join(filter(lambda sl: sl or False, file_content.replace('\n', '')))
 
 
 def repl(inp):
