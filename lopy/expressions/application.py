@@ -31,10 +31,7 @@ class Application(Expression):
         return self.op.name()
 
     def operands_names(self):
-        # TO FIX
-        # should work correctly when args are not
-        # variable lookups
-        return [a.name() for a in self.op_args]
+        return [a.name() for a in self.op_args if getattr(a, 'name', None)]
 
     def get_op(self):
         return self.op
