@@ -72,6 +72,11 @@ def test_cond_with_else(ipr):
     assert ipr.eval(expr) == 3
 
 
+def test_cond_with_multiple_consecutive_expressions(ipr):
+    expr = '(cond ((= 1 1) (+ 2 1) (- 0 1)) ((= 3 1) 2) (else 3))'
+    assert ipr.eval(expr) == -1
+
+
 def test_recursive_proc(ipr):
     expr = '(define (factorial n) (if (= n 1) 1 (* n (factorial (- n 1))))) (factorial 10)'
     assert ipr.eval(expr) == 3628800
