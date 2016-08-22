@@ -1,5 +1,6 @@
 import inspect_expr as ins
 
+from .runtime_exprs import RuntimeLambda
 from lopy_abc import Expression
 
 
@@ -20,11 +21,15 @@ class Definition(Expression):
 
     def __init__(self, var, *args):
         self.name = var.name()
-        self.param_names = var.operands_names() if ins.is_application(var) else None
+        if ins.is_application(var):
+            self.is_lambda_definition = True
+            self.param_names = var.operands_names()
+        else:
+            self.is_lambda_definition = False
         self.exprs = args
 
     def eval(self, env):
-        if self.param_names:
+        if self.is_lambda_definition:
             lambda_obj = Lambda(self.param_names, *self.exprs)
             expr_res = lambda_obj.eval(env)
         else:
@@ -69,34 +74,12 @@ class Lambda(Expression):
         self.body = args
 
     def eval(self, env):
+        print(self.body)
         return RuntimeLambda(self.args, self.body, env)
 
     @staticmethod
     def supported_exprs():
         return ['lambda']
-
-
-class RuntimeLambda:
-
-    def __init__(self, args, body, env):
-        self.args = args
-        self.body = body
-        self.env = env
-
-    def eval(self, new_env):
-        return [expr.eval(new_env) for expr in self.body][-1]
-
-    def environment(self):
-        return self.env
-
-    def arg_list(self):
-        return self.args
-
-    # TO FIX
-    # move to different module
-    @staticmethod
-    def supported_exprs():
-        return []
 
 
 class BeginExpr(Expression):
@@ -118,13 +101,14 @@ class Cond(Expression):
         self.cond_seq = args
 
     def eval(self, env):
+        # this is bad
         for cond in self.cond_seq:
-            if cond.name() == 'else':
-                return cond.op_args[0].eval(env)
-            pred_res = cond.op.eval(env)
-            if pred_res:
-                return cond.op_args[0].eval(env)
-        return None
+            if cond.name() == 'else' or self._is_condition_true(env, cond):
+                return [conseq.eval(env) for conseq in cond.get_operands()][-1]
+
+    @staticmethod
+    def _is_condition_true(env, cond):
+        return cond.get_op().eval(env)
 
     @staticmethod
     def supported_exprs():

@@ -1,9 +1,6 @@
 import re
-import inspect
-import importlib
 import settings
-
-from pathlib import Path
+import dynamic_import as di
 
 
 class Parser:
@@ -18,29 +15,20 @@ class Parser:
 
     def parse(self, raw_src):
         tokens = self._tokenize(raw_src)
-        exprs = []
-        for token in tokens:
-            expr = self._parse(token)
-            exprs.append(expr)
-        return exprs
+        return [self._parse(token) for token in tokens]
 
     def _load_module_classes_as_map(self, mod_name):
-        mod = importlib.import_module(mod_name)
-        class_map = {}
-        for _, obj in mod.__dict__.items():
-            if inspect.isclass(obj) and obj.__module__ == mod_name:
-                for name in obj.supported_exprs():
-                    class_map[name] = obj
-        return class_map
+        mod_classes = di.import_module_classes(mod_name)
+        return {name: ClassObj
+                for ClassObj in mod_classes
+                for name in ClassObj.supported_exprs()}
 
     def _parse(self, expr):
         if not isinstance(expr, list):
             return self._create_atom(expr)
         op = expr[0]
         raw_operands = expr[1:]
-        parsed_operands = []
-        for o in raw_operands:
-            parsed_operands.append(self._parse(o))
+        parsed_operands = [self._parse(o) for o in raw_operands]
         if not isinstance(op, list) and op in self.special:
             cons = self.special[op]
             return cons(*parsed_operands)
@@ -49,7 +37,6 @@ class Parser:
             return cons(self._parse(op), *parsed_operands)
 
     def _create_atom(self, atom):
-        expr_type = None
         try:
             int(atom)
             expr_type = 'Number'

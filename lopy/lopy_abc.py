@@ -14,4 +14,13 @@ class Expression(metaclass=abc.ABCMeta):
 
 
 class BuiltinProcedure(metaclass=abc.ABCMeta):
-    pass
+
+    @staticmethod
+    @abc.abstractmethod
+    def apply(*args):
+        pass
+
+    @staticmethod
+    @abc.abstractmethod
+    def __repr__():
+        pass

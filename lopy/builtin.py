@@ -1,82 +1,84 @@
 import operator as op
 import functools as ft
 
+from lopy_abc import BuiltinProcedure
+
 # TO THINK
 # change to function with corresponding repr ?
 
 
-class EqualityOp:
-
-    @staticmethod
-    def __repr__():
-        return '='
+class EqualityOp(BuiltinProcedure):
 
     @staticmethod
     def apply(a, b):
         return a == b
 
-
-class SumOp:
-
     @staticmethod
     def __repr__():
-        return '+'
+        return '='
+
+
+class SumOp(BuiltinProcedure):
 
     @staticmethod
     def apply(*args):
         return ft.reduce(lambda v, el: v + el, args, 0)
 
-
-class MultOp:
-
     @staticmethod
     def __repr__():
-        return '*'
+        return '+'
+
+
+class MultOp(BuiltinProcedure):
 
     @staticmethod
     def apply(*args):
         return ft.reduce(lambda v, el: v * el, args, 1)
 
-
-class SubstractOp:
-
     @staticmethod
     def __repr__():
-        return '-'
+        return '*'
+
+
+class SubstractOp(BuiltinProcedure):
 
     @staticmethod
     def apply(*args):
         return ft.reduce(lambda v, el: v - el, args[1:], args[0])
 
-
-class GreaterOp:
-
     @staticmethod
     def __repr__():
-        return '>'
+        return '-'
+
+
+class GreaterOp(BuiltinProcedure):
 
     @staticmethod
     def apply(a, b):
         return a > b
 
-
-class DivisionOp:
-
     @staticmethod
     def __repr__():
-        return '/'
+        return '>'
+
+
+class DivisionOp(BuiltinProcedure):
 
     @staticmethod
     def apply(a, b):
         return a / b
 
-
-class RemainderOp:
-
     @staticmethod
     def __repr__():
-        return 'remainder'
+        return '/'
+
+
+class RemainderOp(BuiltinProcedure):
 
     @staticmethod
     def apply(a, b):
         return a % b
+
+    @staticmethod
+    def __repr__():
+        return 'remainder'

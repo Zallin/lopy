@@ -36,6 +36,12 @@ class Application(Expression):
         # variable lookups
         return [a.name() for a in self.op_args]
 
+    def get_op(self):
+        return self.op
+
+    def get_operands(self):
+        return self.op_args
+
     @staticmethod
     def supported_exprs():
         return ['Application']

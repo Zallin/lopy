@@ -16,6 +16,4 @@ class Interpreter:
 
     def eval(self, raw_src):
         exprs = self.parser.parse(raw_src)
-        for exp in exprs:
-            res = exp.eval(self.global_env)
-        return res
+        return [exp.eval(self.global_env) for exp in exprs][-1]
