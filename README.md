@@ -5,12 +5,12 @@ Lopy is an MIT Scheme interpreter which creation was inspired by SICP book.
 Currenly, two modes are supported. 
 REPL:
 ```python
-python3 lopy/lo.py
+python3 lopy
 ```
 And source from file mode:
 ```python
-python3 lopy/lo.py -f example.rkt
-python3 lopy/lo.py --file example.rkt
+python3 lopy -f example.rkt
+python3 lopy --file example.rkt
 ```
 ## TODO
 1. Parser should return some kind of special object instead of application if the following cases (marked with []):
