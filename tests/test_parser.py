@@ -1,7 +1,7 @@
 import context
 import pytest
 
-from parser import Parser
+from lo_parser import Parser
 
 from expressions.atom import *
 from expressions.special import *

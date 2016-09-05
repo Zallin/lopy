@@ -1,7 +1,7 @@
 import dynamic_import as di
 import settings
 
-from parser import Parser
+from lo_parser import Parser
 from environment import Environment
 
 
